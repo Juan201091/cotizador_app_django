@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Entornos virtuales
+venv/
+ENV/
+env/
+.env/
+
+# Archivos de logs
+*.log
+
+# Archivos de base de datos locales
+*.sqlite3
+
+# Archivos temporales de sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Archivos de Python bytecode
+*.pyc
+*.pyo
+
+# Archivos de configuración de IDEs
+.vscode/
+.idea/
+*.iml
+
+# Carpeta de migraciones de Django (opcional, si querés versionarlas, quitá esta línea)
+**/migrations/__pycache__/
+**/migrations/*.pyc
