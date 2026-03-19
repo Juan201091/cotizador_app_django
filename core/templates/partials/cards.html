@@ -1,0 +1,62 @@
+{% if resultado %}
+<div id="resultado-cards" class="row g-4">
+  {% for r in resultado %}
+  <div class="col-12">
+    <div class="card h-100 bg-light rounded-4 border-0 shadow-sm resultado-card">
+      <div class="card-body d-flex flex-column">
+        <!-- Título -->
+        <h4 class="card-title text-center mb-3 fade-item">{{ r.plato|capfirst }}</h4>
+
+        <!-- Datos con fade progresivo -->
+        <p class="card-text mb-1 fade-item delay-1">
+          <strong class="text-primary">Costo ARS:</strong>
+          <span class="text-primary">{{ r.costo_pesos.valor|floatformat:2 }}</span>
+        </p>
+        <p class="card-text mb-2 fade-item delay-2">
+          <strong class="text-success">Costo USD:</strong>
+          <span class="text-success">{{ r.costo_usd.valor|floatformat:2 }}</span>
+        </p>
+        <p class="card-text mb-2 fade-item delay-3">
+          <strong>Ingredientes:</strong> {{ r.ingredientes|join:", " }}
+        </p>
+        <p class="card-text mt-auto fade-item delay-4">
+          <strong>Instrucciones:</strong> {{ r.instrucciones }}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<style>
+  /* Fade-in animación general */
+  .fade-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+  }
+
+  /* Staggered delays */
+  .fade-item.delay-1 { animation-delay: 0.2s; }
+  .fade-item.delay-2 { animation-delay: 0.4s; }
+  .fade-item.delay-3 { animation-delay: 0.6s; }
+  .fade-item.delay-4 { animation-delay: 0.8s; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Animación hover de la tarjeta */
+  .resultado-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .resultado-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  }
+</style>
+{% endif %}

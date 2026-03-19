@@ -32,6 +32,6 @@ Thumbs.db
 .idea/
 *.iml
 
-# Carpeta de migraciones de Django (opcional, si querés versionarlas, quitá esta línea)
+# Carpeta de migraciones 
 **/migrations/__pycache__/
 **/migrations/*.pyc

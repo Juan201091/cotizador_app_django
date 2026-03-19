@@ -131,7 +131,7 @@ class RecetaService:
                 "plato": plato.nombre,
                 "costo_pesos": costo_pesos,
                 "costo_usd": costo_usd,
-                "Instrucciones": plato.receta.instrucciones,
+                "instrucciones": plato.receta.instrucciones,
                 "ingredientes": [ing.ingrediente.nombre for ing in plato.ingredientes],
             })
 

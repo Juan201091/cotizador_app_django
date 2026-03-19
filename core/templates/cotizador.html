@@ -1,0 +1,131 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cotizador de Recetas</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <style>
+      body {
+        background-color: #121212;
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
+
+      .form-container {
+        width: 50vw;
+        background-color: #333333;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      }
+
+      .form-control,
+      .form-select {
+        font-weight: bold;
+      }
+
+      /* Loader full screen */
+      .spinner-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(18, 18, 18, 0.8);
+        display: none; /* oculto por defecto */
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      /* Cards container */
+      #resultado-container .card {
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+      }
+
+      #resultado-container .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+
+      #resultado-container {
+        margin-top: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .form-container {
+          width: 90vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loader HTMX -->
+    <div id="loader" class="spinner-overlay">
+      <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="form-container">
+      <h2 class="mb-4 text-center">Cotizador de Recetas</h2>
+
+      <form id="cotizador-form"
+            hx-post="{% url 'cotizador' %}"
+            hx-target="#resultado-container"
+            hx-trigger="change delay:300ms">
+        {% csrf_token %}
+
+        <!-- Select de platos -->
+        <div class="mb-3">
+          <label for="plato" class="form-label">Seleccione un plato</label>
+          <select class="form-select" id="plato" name="plato" required>
+            <option value="" selected disabled>-- Elija un plato --</option>
+            {% for p in platos %}
+              <option value="{{ p }}">{{ p|capfirst }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Fecha -->
+        <div class="mb-3">
+          <label for="fecha" class="form-label">Fecha (últimos 30 días)</label>
+          <input type="date" class="form-control" id="fecha" name="fecha"
+                 value="{{ hoy }}" min="{{ min_fecha }}" max="{{ hoy }}"  onclick="this.showPicker()"/>
+        </div>
+      </form>
+
+      <!-- Contenedor de resultados -->
+      <div id="resultado-container"></div>
+    </div>
+
+    <!-- Loader script -->
+    <script>
+      const loader = document.getElementById("loader");
+
+      document.body.addEventListener("htmx:beforeRequest", () => {
+        loader.style.display = "flex";
+      });
+
+      document.body.addEventListener("htmx:afterSwap", () => {
+        loader.style.display = "none";
+      });
+
+      document.body.addEventListener("htmx:responseError", () => {
+        loader.style.display = "none";
+        alert("Ocurrió un error al procesar la solicitud.");
+      });
+    </script>
+  </body>
+</html>
