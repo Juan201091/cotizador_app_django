@@ -1,0 +1,94 @@
+.gradient-header {
+    background: linear-gradient(to right, #60a5fa, #3b82f6);
+}
+
+.gradient-form-header {
+    background: linear-gradient(to right, #60a5fa, #3b82f6);
+}
+
+.cost-card-backdrop {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.ingredient-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #60a5fa;
+}
+
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 18, 18, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.fade-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+}
+
+.fade-item.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.fade-item.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.fade-item.delay-3 {
+    animation-delay: 0.6s;
+}
+
+.fade-item.delay-4 {
+    animation-delay: 0.8s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-azul-suave {
+    background: linear-gradient(to right, #60a5fa, #3b82f6);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-azul-suave:hover {
+    background: linear-gradient(to right, #3b82f6, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.icono-azul {
+    color: #3b82f6;
+}
+
+.border-azul {
+    border-color: #60a5fa;
+}
+
+.bg-azul-suave {
+    background-color: #dbeafe;
+}
+
+.badge-azul {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+}

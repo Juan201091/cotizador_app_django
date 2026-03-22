@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict
 
-# Puerto para leer XLSX (Carnes y Pescados)
 class LeerXLSPort(ABC):
     @abstractmethod
     def leer(self, path: str) -> List[Dict]:
@@ -11,7 +10,6 @@ class LeerXLSPort(ABC):
         """
         pass
 
-# Puerto para leer PDF (Verdulería)
 class LeerPDFPort(ABC):
     @abstractmethod
     def leer(self, path: str) -> List[Dict]:
@@ -21,7 +19,6 @@ class LeerPDFPort(ABC):
         """
         pass
 
-# Puerto para leer Markdown (Recetas)
 class LeerMDPort(ABC):
     @abstractmethod
     def leer(self, path: str) -> List[Dict]:

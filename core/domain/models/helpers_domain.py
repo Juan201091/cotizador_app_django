@@ -12,9 +12,6 @@ class Cantidad:
     # ─── Método público para CalculadorCostoReceta ───
     def ajustar_a_compra(self) -> int:
         return self.gramos
-
-# Value Object para manejar dinero
-class Dinero:
-    def __init__(self, monto: float, moneda: str):
-        self.monto = monto
-        self.moneda = moneda  # "ARS" o "USD"
+    
+    def __str__(self):
+        return f"{self.gramos}g"
