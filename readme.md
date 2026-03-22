@@ -14,7 +14,6 @@ La idea fue resolver el problema de manera clara y ordenada, priorizando que el 
 * Frontend: HTML + Bootstrap 5 + HTMX
 * Estilos: CSS custom + Bootstrap
 * Fuentes de datos: XLS, PDF y Markdown
-* Cache: Django Cache Framework
 * Contenedores: Docker + Docker Compose
 
 ---
@@ -31,29 +30,6 @@ El proyecto se organizó en distintas capas:
 * Views/Templates: manejo HTTP y render
 
 No es una implementación estricta de arquitectura hexagonal, pero sí sigue bastante la idea de separar responsabilidades.
-
----
-
-### Uso de Use Cases
-
-Se implementaron casos de uso como:
-
-* `ObtenerRecetasUseCase`
-* `CalcularCostoRecetasUseCase`
-
-En este caso algunos son simples, pero ayudan a mantener la vista limpia y desacoplada de la lógica.
-
----
-
-### Cache
-
-Para evitar procesar las fuentes de datos en cada request, los datos base se guardan en cache. Esto mejora el rendimiento y simplifica el flujo general.
-
----
-
-### Inyección de dependencias
-
-Se utilizó un enfoque simple mediante funciones tipo provider para instanciar servicios y casos de uso, evitando acoplar la vista con la infraestructura.
 
 ---
 
@@ -79,7 +55,7 @@ Se utilizó un enfoque simple mediante funciones tipo provider para instanciar s
 
 ## Asunciones
 
-* Los archivos de entrada tienen un formato consistente
+* Los archivos de entrada tienen un formato consistente y no cambian
 * Los ingredientes coinciden entre recetas y precios
 * La cotización del dólar está disponible para la fecha consultada
 * El volumen de datos es acotado
@@ -88,9 +64,8 @@ Se utilizó un enfoque simple mediante funciones tipo provider para instanciar s
 
 ## Limitaciones
 
-* No está preparado para alta concurrencia
 * No hay persistencia histórica de datos
-* Dependencia de archivos externos como fuente principal
+* Dependencia de archivos internos como fuente principal
 
 ---
 
@@ -98,35 +73,46 @@ Se utilizó un enfoque simple mediante funciones tipo provider para instanciar s
 
 ### 1. Clonar el repositorio
 
-git clone <repo_url>
+```bash
+git clone <https://github.com/Juan201091/WNS.git>
+cd <repo>
+```
 
-### 2. Usando Docker (recomendado)
+---
 
-Si tenés Docker instalado, podés levantar todo el entorno con:
+### 2. Requisitos
 
-docker-compose up --build
+Asegurarse de tener instalado:
+
+* Docker
+* Docker Compose
+
+---
+
+### 3. Ejecutar con Docker (recomendado)
+
+```bash
+docker-compose up --build -d
+```
+
+Esto levanta automáticamente todos los servicios necesarios.
 
 Una vez iniciado, la aplicación queda disponible en:
 
+```
 http://localhost:8000/
+```
 
-En este entorno además se centraliza el logging de la aplicación, lo que permite tener trazabilidad de lo que ocurre (carga de datos, uso de cache, errores, etc.), algo útil tanto para debug como para operación.
+En este entorno también se centraliza el logging de la aplicación, lo que permite tener trazabilidad de eventos importantes como carga de datos, uso de cache y posibles errores.
 
----
 
 ## Posibles mejoras / Escalabilidad
 
-Si este proyecto tuviera que escalar o pasar a un entorno productivo, los siguientes pasos serían razonables:
+Si la aplicación tuviera que escalar a un entorno productivo, sería recomendable incorporar una base de datos para persistir la información y no depender únicamente de archivos en memoria. También se podría utilizar un sistema de cache distribuido como Redis para mejorar el rendimiento en escenarios con múltiples usuarios.
 
-* Incorporar una base de datos (por ejemplo PostgreSQL)
-* Utilizar Redis como sistema de cache
-* Separar algunos servicios (por ejemplo la cotización)
-* Procesar tareas pesadas en background
-* Desplegar con Nginx + Gunicorn en contenedores
+Por otro lado, el servicio de cotización del dólar podría optimizarse mediante cacheo por fecha, ya que se trata de un valor determinístico. Esto permitiría reducir llamadas a servicios externos y mejorar los tiempos de respuesta, además de considerar el uso de múltiples fuentes para mayor resiliencia.
 
-También sería importante agregar tests y mejorar el monitoreo general del sistema.
-
----
+Finalmente, se podrían delegar tareas más pesadas a procesos en background y realizar el despliegue utilizando herramientas como Nginx y Gunicorn dentro de contenedores, lo que permitiría mejorar la estabilidad y facilitar la escalabilidad de la aplicación.
 
 ## Cierre
 

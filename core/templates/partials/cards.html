@@ -52,25 +52,12 @@
                     {{ ing.nombre|capfirst }}:
                   </span>
                   <span class="text-secondary ms-1">
-                    {{ ing.cantidad }}
-                  </span>
+                    {{ ing.cantidad_receta }} </span>
                 </div>
               </div>
             </div>
             {% endfor %}
           </div>
-        </div>
-
-        <!-- Instrucciones -->
-        <div class="p-4 bg-light fade-item delay-4">
-          <div class="d-flex align-items-center gap-2 mb-3">
-            <i class="bi bi-clock" style="font-size: 1.25rem; color: #ea580c;"></i>
-            <h3 class="fs-5 fw-semibold text-dark mb-0">Instrucciones</h3>
-          </div>
-
-          <p class="text-secondary lh-base mb-0">
-            {{ r.instrucciones }}
-          </p>
         </div>
 
       </div>

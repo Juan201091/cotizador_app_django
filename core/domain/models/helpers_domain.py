@@ -3,7 +3,7 @@ class Cantidad:
 
     def __init__(self, gramos: int):
         self.gramos = self._ajustar(gramos)
-
+        self.gramos_reales = gramos  # Para mostrar la cantidad real en la receta
     def _ajustar(self, gramos: int) -> int:
         if gramos % self.MULTIPLO == 0:
             return gramos

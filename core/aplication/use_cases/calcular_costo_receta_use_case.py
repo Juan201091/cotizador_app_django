@@ -23,12 +23,14 @@ class CalcularCostoRecetasUseCase:
 
             ingredientes = []
             for i in plato.ingredientes:
-                gramos = i.cantidad.ajustar_a_compra()
+                gramos_receta = i.cantidad.gramos_reales
+                gramos_compra = i.cantidad.ajustar_a_compra()
 
                 ingredientes.append(
                     {
                         "nombre": i.ingrediente.nombre,
-                        "cantidad": self.formatear_cantidad(gramos),
+                        "cantidad_receta": self.formatear_cantidad(gramos_receta),
+                        "cantidad_compra": self.formatear_cantidad(gramos_compra),
                     }
                 )
 
