@@ -75,7 +75,7 @@ No es una implementación estricta de arquitectura hexagonal, pero sí sigue bas
 
 ```bash
 git clone <https://github.com/Juan201091/cotizador_app_django.git>
-cd <repo>
+cd <cotizador_app_django>
 ```
 
 ---
