@@ -114,6 +114,8 @@ Por otro lado, el servicio de cotización del dólar podría optimizarse mediant
 
 Finalmente, se podrían delegar tareas más pesadas a procesos en background y realizar el despliegue utilizando herramientas como Nginx y Gunicorn dentro de contenedores, lo que permitiría mejorar la estabilidad y facilitar la escalabilidad de la aplicación.
 
+Se podria considerar implementar una función central que unifique nombres y valores al leer los archivos, asegurando consistencia en el formato y facilitando la integración de nuevas fuentes de datos.
+
 ## Cierre
 
 La idea no fue hacer algo perfecto, sino una solución clara, mantenible y con una estructura que permita crecer sin tener que rehacer todo desde cero.
