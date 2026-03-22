@@ -74,7 +74,7 @@ No es una implementación estricta de arquitectura hexagonal, pero sí sigue bas
 ### 1. Clonar el repositorio
 
 ```bash
-git clone <https://github.com/Juan201091/WNS.git>
+git clone <https://github.com/Juan201091/cotizador_app_django.git>
 cd <repo>
 ```
 
