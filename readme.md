@@ -69,6 +69,14 @@ No es una implementación estricta de arquitectura hexagonal, pero sí sigue bas
 
 ---
 
+## Requisitos y entorno recomendado
+
+Se recomienda ejecutar este proyecto en Linux, ya que Docker funciona de forma nativa.
+
+En Windows, Docker requiere Docker Desktop (o WSL2) en ejecución. Si Docker Desktop no está levantado, docker-compose no funcionará correctamente.
+
+Por este motivo, el entorno en Windows puede resultar más inestable o generar inconvenientes adicionales.
+
 ## Cómo ejecutar el proyecto
 
 ### 1. Clonar el repositorio
