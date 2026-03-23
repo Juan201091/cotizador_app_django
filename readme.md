@@ -124,6 +124,8 @@ Finalmente, se podrían delegar tareas más pesadas a procesos en background y r
 
 Se podria considerar implementar una función central que unifique nombres y valores al leer los archivos, asegurando consistencia en el formato y facilitando la integración de nuevas fuentes de datos.
 
+También se podría exponer el servicio de cotización como una API independiente, permitiendo su consumo sin necesidad de levantar toda la aplicación. Esto facilitaría su reutilización y desacople del resto del sistema
+
 ## Cierre
 
 La idea no fue hacer algo perfecto, sino una solución clara, mantenible y con una estructura que permita crecer sin tener que rehacer todo desde cero.
