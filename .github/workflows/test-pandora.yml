@@ -1,19 +1,10 @@
 name: Test Pandora
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: self-hosted
     steps:
-      - name: Ver servidor
-        run: |
-          hostname
-          whoami
-          pwd
-
-      - name: Ver Docker
-        run: |
-          docker --version
-          docker ps
+      - run: hostname
