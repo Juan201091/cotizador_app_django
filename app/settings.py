@@ -25,8 +25,12 @@ SECRET_KEY = "django-insecure-)pka6=9=b+&99ij4-uz05^lxr%o5d79r&@7j7v*yc^+5$x%s42
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "True")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1","cotizador.local","cotizador.docker.local"]
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://cotizador.local",
+    "http://cotizador.docker.local"	
+]
 
 # Application definition
 
@@ -120,6 +124,9 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "core" / "static",
 ]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
