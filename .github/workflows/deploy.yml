@@ -1,0 +1,18 @@
+name: Pandora Deploy
+
+on: push
+
+jobs:
+  deploy:
+    working-directory: /var/www/cotizador_app_django
+    runs-on: self-hosted
+
+    steps:
+      - name: Ver usuario
+        run: whoami
+
+      - name: Descargar imagen
+        run: git pull
+
+      - name: Build imagen
+        run: docker-compose up --build -d
