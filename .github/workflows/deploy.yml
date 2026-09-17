@@ -18,4 +18,4 @@ jobs:
         run: git pull
 
       - name: Build imagen
-        run: docker-compose up --build -d
+        run: docker compose up --build -d
