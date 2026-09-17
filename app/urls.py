@@ -17,11 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from core.views import cotizador_view, index_view
+from core.views import cotizador_view, index_view, deploy_view
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", index_view, name="cotizador"),
+    path("", index_view, name="index"),
     path("cotizador/", cotizador_view, name="cotizador"),
+    path("deploy/", deploy_view, name="deploy"),
 ]

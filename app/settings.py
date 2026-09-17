@@ -29,7 +29,8 @@ ALLOWED_HOSTS = ["127.0.0.1","cotizador.local","cotizador.docker.local"]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://cotizador.local",
-    "http://cotizador.docker.local"	
+    "http://cotizador.docker.local",
+    "http://127.0.0.1:8010",	
 ]
 
 # Application definition

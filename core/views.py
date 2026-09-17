@@ -73,3 +73,7 @@ def cotizador_view(request):
     )
 
     return render(request, "partials/cards.html", {"resultado": resultado})
+
+
+def deploy_view(request):
+    return render(request, "deploy.html")
