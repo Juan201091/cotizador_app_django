@@ -1,7 +1,6 @@
 name: Test Pandora
 
-on:
-  workflow_dispatch:
+on: push
 
 jobs:
   test:
