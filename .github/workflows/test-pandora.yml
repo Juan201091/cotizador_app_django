@@ -1,7 +1,7 @@
 name: Test Pandora
 
 on:
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
   test:
