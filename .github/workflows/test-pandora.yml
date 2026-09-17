@@ -1,4 +1,4 @@
-```yaml
+
 name: Test Pandora
 
 on:
@@ -19,5 +19,4 @@ jobs:
         run: |
           docker --version
           docker ps
-```
 
