@@ -17,9 +17,6 @@ jobs:
           echo "hostname=$(hostname)" >> "$GITHUB_OUTPUT"
           echo "usuario=$(whoami)" >> "$GITHUB_OUTPUT"
       
-      - name: Fallo aproposito
-        run: exit 1
-
   deploy:
     needs: test-fallo
     runs-on: self-hosted
