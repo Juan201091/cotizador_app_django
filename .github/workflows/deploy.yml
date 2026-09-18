@@ -16,7 +16,7 @@ jobs:
         run: |
           echo "hostname=$(hostname)" >> "$GITHUB_OUTPUT"
           echo "usuario=$(whoami)" >> "$GITHUB_OUTPUT"
-    step:
+    steps:
       - name: Fallo aproposito
         run: exit 1
 
