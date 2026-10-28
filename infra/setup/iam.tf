@@ -63,21 +63,20 @@ data "aws_iam_policy_document" "ecr" {
     resources = ["*"]
   }
 
-  # TODO: descomentar cuando exista ecr.tf
-  # statement {
-  #   effect = "Allow"
-  #   actions = [
-  #     "ecr:CompleteLayerUpload",
-  #     "ecr:UploadLayerPart",
-  #     "ecr:InitiateLayerUpload",
-  #     "ecr:BatchCheckLayerAvailability",
-  #     "ecr:PutImage"
-  #   ]
-  #   resources = [
-  #     aws_ecr_repository.app.arn,
-  #     aws_ecr_repository.proxy.arn,
-  #   ]
-  # }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:CompleteLayerUpload",
+      "ecr:UploadLayerPart",
+      "ecr:InitiateLayerUpload",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:PutImage"
+    ]
+    resources = [
+      aws_ecr_repository.app.arn,
+      aws_ecr_repository.proxy.arn,
+    ]
+  }
 }
 
 resource "aws_iam_policy" "ecr" {
