@@ -1,0 +1,3 @@
+*.sh text eol=lf
+*.tpl text eol=lf
+proxy/gunicorn_headers text eol=lf
