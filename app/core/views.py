@@ -1,7 +1,10 @@
 import datetime
 from django.shortcuts import render
 from django.core.cache import cache
-from core.composition_root.composition_services import get_recetas_use_case, get_calcular_costo_use_case
+from core.composition_root.composition_services import (
+    get_recetas_use_case,
+    get_calcular_costo_use_case,
+)
 import logging
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -11,13 +14,17 @@ logger = logging.getLogger(__name__)
 
 def index_view(request):
     hoy = datetime.date.today().isoformat()
-    min_fecha = (datetime.date.today() - datetime.timedelta(days=30)).isoformat()
+    min_fecha = (
+        datetime.date.today() - datetime.timedelta(days=30)
+    ).isoformat()
 
     try:
         data = cache.get("platos_base")
 
         if not data:
-            logger.info("Cache sin datos - iniciado carga desde fuentes de datos")
+            logger.info(
+                "Cache sin datos - iniciado carga desde fuentes de datos"
+            )
 
             use_case = get_recetas_use_case()
             platos, precios = use_case.ejecutar()
@@ -34,7 +41,11 @@ def index_view(request):
         return render(
             request,
             "cotizador.html",
-            {"platos": [p.nombre for p in platos], "hoy": hoy, "min_fecha": min_fecha},
+            {
+                "platos": [p.nombre for p in platos],
+                "hoy": hoy,
+                "min_fecha": min_fecha,
+            },
         )
 
     except Exception:
