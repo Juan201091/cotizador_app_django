@@ -5,6 +5,7 @@ from core.aplication.ports.ports import LeerPDFPort
 
 logger = logging.getLogger(__name__)
 
+
 class LeerPDFImpl(LeerPDFPort):
     EXTENSION = ".pdf"
 
@@ -19,7 +20,9 @@ class LeerPDFImpl(LeerPDFPort):
     def leer(self, archivo=None):
         if archivo and hasattr(archivo, "name"):
             if not archivo.name.lower().endswith(self.EXTENSION):
-                raise ValueError(f"Archivo inválido, se esperaba un '{self.EXTENSION}'")
+                raise ValueError(
+                    f"Archivo inválido, se esperaba un '{self.EXTENSION}'"
+                )
 
         archivo = archivo or "data/verduleria.pdf"
         resultados = []
@@ -39,7 +42,16 @@ class LeerPDFImpl(LeerPDFPort):
                         if not linea or "http" in linea.lower():
                             continue
 
-                        if any(x in linea.lower() for x in ["built with", "actualizado", "precios", "lista", "consulte"]):
+                        if any(
+                            x in linea.lower()
+                            for x in [
+                                "built with",
+                                "actualizado",
+                                "precios",
+                                "lista",
+                                "consulte",
+                            ]
+                        ):
                             continue
 
                         match = re.search(r"(.+?)\s+\$([\d\.,]+)", linea)

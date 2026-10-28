@@ -22,7 +22,10 @@ class Ingrediente:
         self.precio_x_250g = precio_x_250g
 
     def __str__(self):
-        return f"Ingrediente: {self.nombre}, Tipo: {self.tipo}, Precio unitario (250g): {self.precio_x_250g}" 
+        return (
+            f"Ingrediente: {self.nombre}, Tipo: {self.tipo}, "
+            f"Precio unitario (250g): {self.precio_x_250g}"
+        )
 
 
 # Entidad PlatoIngrediente
@@ -32,13 +35,20 @@ class PlatoIngrediente:
         self.cantidad = Cantidad(cantidad_gramos)
 
     def __str__(self):
-        return f"PlatoIngrediente: {self.ingrediente.nombre}, Cantidad: {self.cantidad.valor}g"
+        return (
+            f"PlatoIngrediente: {self.ingrediente.nombre}, "
+            f"Cantidad: {self.cantidad.valor}g"
+        )
 
 
 # Entidad Plato
 class Plato:
     def __init__(
-        self, id: int, nombre: str, receta: Receta, ingredientes: List[PlatoIngrediente]
+        self,
+        id: int,
+        nombre: str,
+        receta: Receta,
+        ingredientes: List[PlatoIngrediente],
     ):
         self.id = id
         self.nombre = nombre
@@ -46,8 +56,11 @@ class Plato:
         self.ingredientes = ingredientes
 
     def __str__(self):
-        return f"Plato: {self.nombre}, Receta: {self.receta.nombre}, Ingredientes: {[i.ingrediente.nombre for i in self.ingredientes]}" 
-
+        nombres = [i.ingrediente.nombre for i in self.ingredientes]
+        return (
+            f"Plato: {self.nombre}, Receta: {self.receta.nombre}, "
+            f"Ingredientes: {nombres}"
+        )
 
 
 class Dinero:

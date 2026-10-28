@@ -29,8 +29,12 @@ class CalcularCostoRecetasUseCase:
                 ingredientes.append(
                     {
                         "nombre": i.ingrediente.nombre,
-                        "cantidad_receta": self.formatear_cantidad(gramos_receta),
-                        "cantidad_compra": self.formatear_cantidad(gramos_compra),
+                        "cantidad_receta": self.formatear_cantidad(
+                            gramos_receta
+                        ),
+                        "cantidad_compra": self.formatear_cantidad(
+                            gramos_compra
+                        ),
                     }
                 )
 

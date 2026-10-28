@@ -6,7 +6,10 @@ logger = logging.getLogger(__name__)
 
 
 class CotizadorService:
-    BASE_URL = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{fecha}/v1/currencies/usd.json"
+    BASE_URL = (
+        "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{fecha}"
+        "/v1/currencies/usd.json"
+    )
     TIMEOUT = 5
     CACHE_TTL = 60 * 60 * 24
     FALLBACK = 1400
@@ -36,7 +39,9 @@ class CotizadorService:
 
             except Exception as e:
                 logger.warning(
-                    "Error obteniendo dólar (intento %s): %s", intento + 1, str(e)
+                    "Error obteniendo dólar (intento %s): %s",
+                    intento + 1,
+                    str(e),
                 )
 
         logger.error("Usando fallback para cotización en %s", fecha)

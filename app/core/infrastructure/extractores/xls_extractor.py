@@ -5,6 +5,7 @@ from core.aplication.ports.ports import LeerXLSPort
 import logging
 logger = logging.getLogger(__name__)
 
+
 class LeerXLSImpl(LeerXLSPort):
     def normalizar_texto(self, valor):
         if pd.isna(valor):
@@ -29,7 +30,7 @@ class LeerXLSImpl(LeerXLSPort):
 
         try:
             return float(valor)
-        except:
+        except Exception:
             return None
 
     def construir_item(self, nombre, precio, tipo):
@@ -89,7 +90,9 @@ class LeerXLSImpl(LeerXLSPort):
 
                     elif precio is not None and nombre_str != "":
                         resultados.append(
-                            self.construir_item(nombre_str.title(), precio, tipo_actual)
+                            self.construir_item(
+                                nombre_str.title(), precio, tipo_actual
+                            )
                         )
                     else:
                         logger.warning(
@@ -110,7 +113,9 @@ class LeerXLSImpl(LeerXLSPort):
 
                     elif precio_p is not None and nombre_p_str != "":
                         resultados.append(
-                            self.construir_item(nombre_p_str.title(), precio_p, "Pescado")
+                            self.construir_item(
+                                nombre_p_str.title(), precio_p, "Pescado"
+                            )
                         )
                     else:
                         logger.warning(
@@ -123,7 +128,7 @@ class LeerXLSImpl(LeerXLSPort):
                 continue
 
         #  Ordenar por tipo: Vacuna, Cerdo, Pollo, Pescado
-        
+
         orden_tipos = {"Vacuna": 0, "Cerdo": 1, "Pollo": 2, "Pescado": 3}
 
         resultados.sort(key=lambda x: orden_tipos.get(x["tipo"], 99))

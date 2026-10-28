@@ -3,6 +3,7 @@ from core.aplication.ports.ports import LeerMDPort
 import logging
 logger = logging.getLogger(__name__)
 
+
 class LeerMDImpl(LeerMDPort):
     EXTENSION = ".md"
 
@@ -17,13 +18,19 @@ class LeerMDImpl(LeerMDPort):
 
     def leer(self, archivo=None):
         if archivo and not str(archivo.name).lower().endswith(self.EXTENSION):
-            raise ValueError(f"Archivo inválido, se esperaba un '{self.EXTENSION}'")
+            raise ValueError(
+                f"Archivo inválido, se esperaba un '{self.EXTENSION}'"
+            )
 
         archivo = archivo or "data/Recetas.md"
         recetas = []
 
         try:
-            with open(archivo, "r", encoding="utf-8") if isinstance(archivo, str) else archivo.open("r", encoding="utf-8") as file:
+            if isinstance(archivo, str):
+                fuente = open(archivo, "r", encoding="utf-8")
+            else:
+                fuente = archivo.open("r", encoding="utf-8")
+            with fuente as file:
                 lineas = file.readlines()
         except Exception:
             logger.exception("Error leyendo archivo MD")
@@ -54,7 +61,10 @@ class LeerMDImpl(LeerMDPort):
                     modo = "ingredientes"
                     continue
 
-                if "instrucciones" in linea.lower() or "preparación" in linea.lower():
+                if (
+                    "instrucciones" in linea.lower()
+                    or "preparación" in linea.lower()
+                ):
                     modo = "instrucciones"
                     continue
 
@@ -64,8 +74,16 @@ class LeerMDImpl(LeerMDPort):
                 linea = self.limpiar_linea(linea)
 
                 if modo == "ingredientes":
-                    match1 = re.search(r"(\d+(?:[\.,]\d+)?)\s*(kg|g)\s+de\s+(.+)", linea, re.IGNORECASE)
-                    match2 = re.search(r"(.+?)\s*:\s*(\d+(?:[\.,]\d+)?)\s*(kg|g)", linea, re.IGNORECASE)
+                    match1 = re.search(
+                        r"(\d+(?:[\.,]\d+)?)\s*(kg|g)\s+de\s+(.+)",
+                        linea,
+                        re.IGNORECASE,
+                    )
+                    match2 = re.search(
+                        r"(.+?)\s*:\s*(\d+(?:[\.,]\d+)?)\s*(kg|g)",
+                        linea,
+                        re.IGNORECASE,
+                    )
 
                     if match1:
                         cantidad_raw = match1.group(1)
@@ -84,7 +102,9 @@ class LeerMDImpl(LeerMDPort):
                     try:
                         cantidad = self.parsear_numero(cantidad_raw)
                     except Exception:
-                        logger.warning("Error parseando número: %s", cantidad_raw)
+                        logger.warning(
+                            "Error parseando número: %s", cantidad_raw
+                        )
                         continue
 
                     receta_actual["ingredientes"].append({

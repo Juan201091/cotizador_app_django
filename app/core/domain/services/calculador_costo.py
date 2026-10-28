@@ -1,5 +1,6 @@
 from core.domain.models.models import Dinero
 
+
 class CalculadorCostoReceta:
 
     def calcular(self, plato, precios_por_ingrediente: dict) -> Dinero:

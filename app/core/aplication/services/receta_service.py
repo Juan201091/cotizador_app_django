@@ -1,4 +1,6 @@
-import unicodedata # libería para normalizar texto (eliminar acentos, etc) ej "Carne de res" -> "carne de res"
+# libería para normalizar texto (eliminar acentos, etc)
+# ej "Carne de res" -> "carne de res"
+import unicodedata
 from typing import List
 from core.domain.models.models import (
     Receta,
@@ -9,7 +11,8 @@ from core.domain.models.models import (
 import logging
 logger = logging.getLogger(__name__)
 
-#Orquestador de la carga de datos y mapeo a modelos de dominio
+# Orquestador de la carga de datos y mapeo a modelos de dominio
+
 
 class RecetaService:
     def __init__(self, excel_reader, pdf_reader, md_reader):
@@ -53,9 +56,7 @@ class RecetaService:
 
         logger.info("Precios mapeados: %s items", len(precios))
         return precios
-    
-    
-    
+
     def _mapear_recetas(self, recetas: List[dict]) -> List[Plato]:
         platos = []
 
