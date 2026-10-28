@@ -1,6 +1,9 @@
 name: Pandora Deploy
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   test-fallo:
