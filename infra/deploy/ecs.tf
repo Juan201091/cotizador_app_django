@@ -95,12 +95,11 @@ resource "aws_ecs_task_definition" "api" {
             containerPath = "/vol/web/static"
             sourceVolume  = "static"
           },
-          # TODO: descomentar cuando exista efs.tf
-          # {
-          #   readOnly      = false
-          #   containerPath = "/vol/web/media"
-          #   sourceVolume  = "efs-media"
-          # }
+          {
+            readOnly      = false
+            containerPath = "/vol/web/media"
+            sourceVolume  = "efs-media"
+          }
         ],
         logConfiguration = {
           logDriver = "awslogs"
@@ -135,12 +134,11 @@ resource "aws_ecs_task_definition" "api" {
             containerPath = "/vol/static"
             sourceVolume  = "static"
           },
-          # TODO: descomentar cuando exista efs.tf
-          # {
-          #   readOnly      = true
-          #   containerPath = "/vol/media"
-          #   sourceVolume  = "efs-media"
-          # }
+          {
+            readOnly      = true
+            containerPath = "/vol/media"
+            sourceVolume  = "efs-media"
+          }
         ]
         logConfiguration = {
           logDriver = "awslogs"
@@ -158,19 +156,18 @@ resource "aws_ecs_task_definition" "api" {
     name = "static"
   }
 
-  # TODO: descomentar cuando exista efs.tf (aws_efs_file_system.media, aws_efs_access_point.media)
-  # volume {
-  #   name = "efs-media"
-  #   efs_volume_configuration {
-  #     file_system_id     = aws_efs_file_system.media.id
-  #     transit_encryption = "ENABLED"
-  #
-  #     authorization_config {
-  #       access_point_id = aws_efs_access_point.media.id
-  #       iam             = "DISABLED"
-  #     }
-  #   }
-  # }
+  volume {
+    name = "efs-media"
+    efs_volume_configuration {
+      file_system_id     = aws_efs_file_system.media.id
+      transit_encryption = "ENABLED"
+
+      authorization_config {
+        access_point_id = aws_efs_access_point.media.id
+        iam             = "DISABLED"
+      }
+    }
+  }
 
   runtime_platform {
     operating_system_family = "LINUX"
